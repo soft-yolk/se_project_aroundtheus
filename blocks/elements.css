@@ -39,6 +39,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin: 0;
 }
 .elements__like-button {
   background: transparent url(../images/like-icon.svg) no-repeat center;

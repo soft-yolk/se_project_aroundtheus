@@ -6,8 +6,10 @@
 
 .footer__information {
   font-size: 18px;
+  line-height: 1.2;
   font-weight: 400;
   color: #545454;
+  margin: 0;
 }
 
 @media screen and (max-width: 480px) {
@@ -17,6 +19,8 @@
   .footer__information {
     margin-top: 48px;
     margin-bottom: 36px;
+    margin-left: 19px;
     font-size: 14px;
+    line-height: 1.3;
   }
 }
