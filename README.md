@@ -23,3 +23,5 @@ Good luck and have fun!
 #### Sprint 3 Progress
 
 In this stage of the sprint, I've added a grid that that is responsive, along with some other elements like a header, footer, and a profile section. Some other features I have added are hover effects and text overflow.
+
+[Link to GitHub Pages](https://soft-yolk.github.io/se_project_aroundtheus/)
