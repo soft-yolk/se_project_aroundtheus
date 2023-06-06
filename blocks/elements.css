@@ -1,0 +1,62 @@
+.elements {
+  margin-top: 50px;
+}
+.elements__cards {
+  list-style: none;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 282px);
+  grid-gap: 20px 17px;
+  padding: 0;
+  margin: 0;
+}
+
+.elements__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.elements__image {
+  max-height: 282px;
+  min-height: 282px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+.elements__description {
+  display: flex;
+  background: white;
+  color: black;
+  padding: 25px 20px;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0 0 10px 10px;
+}
+
+.elements__title {
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.elements__like-button {
+  background: transparent url(../images/like-icon.svg) no-repeat center;
+  width: 21px;
+  height: 18px;
+  margin-left: 28px;
+  border: none;
+  transition: opacity 0.2s ease-out;
+}
+
+.elements__like-button:hover {
+  opacity: 50%;
+}
+
+@media screen and (max-width: 480px) {
+  .elements {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
