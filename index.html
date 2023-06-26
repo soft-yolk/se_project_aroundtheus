@@ -48,7 +48,7 @@
         </section>
         <section class="elements page__section">
           <ul class="elements__cards">
-            <li class="elements__card">
+            <!-- <li class="elements__card">
               <img
                 src="./images/yosemite.jpg"
                 alt="Yosemite Valley"
@@ -137,7 +137,7 @@
                   class="elements__like-button"
                 ></button>
               </div>
-            </li>
+            </li> -->
           </ul>
         </section>
       </main>
@@ -151,13 +151,38 @@
         <p class="modal__heading">Edit Profile</p>
         <form class="modal__form">
           <fieldset class="modal__fieldset">
-            <input type="text" name="name" placeholder="Name" />
-            <input type="text" name="description" placeholder="About me" />
+            <input
+              id="name-modal-input"
+              type="text"
+              name="name"
+              placeholder="Name"
+            />
+            <input
+              id="description-modal-input"
+              type="text"
+              name="description"
+              placeholder="About me"
+            />
           </fieldset>
           <button class="modal__button">Save</button>
         </form>
       </div>
     </div>
+
+    <template id="element-template">
+      <li class="elements__card">
+        <img src="" alt="" class="elements__image" />
+        <div class="elements__description">
+          <h2 class="elements__title"></h2>
+          <button
+            aria-label="like-button"
+            type="button"
+            class="elements__like-button"
+          ></button>
+        </div>
+      </li>
+    </template>
+
     <script src="./scripts/index.js"></script>
   </body>
 </html>
