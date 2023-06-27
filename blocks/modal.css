@@ -33,7 +33,12 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-color: transparent;
+  transition: opacity 0.5s ease-in;
+
   cursor: pointer;
+}
+.modal__close:hover {
+  opacity: 60%;
 }
 
 .modal__heading {
@@ -55,10 +60,9 @@
   gap: 30px;
 }
 
-input[type="text"] {
+.modal__input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  width: 358px;
   padding: 0 0 13px 0;
   font-size: 14px;
   line-height: 1.2;
@@ -73,6 +77,12 @@ input[type="text"] {
   line-height: 1.2;
   font-weight: 400;
   border-radius: 2px;
+  transition: opacity 0.5s ease-in;
+  cursor: pointer;
+}
+
+.modal__button:hover {
+  opacity: 80%;
 }
 
 @media screen and (max-width: 640px) {
@@ -94,12 +104,8 @@ input[type="text"] {
     margin-top: 75px;
     margin-bottom: 45px;
   }
-  input[type="text"] {
-    width: 238px;
-  }
 
   .modal__button {
-    width: 238px;
     padding: 14px 100px;
     font-size: 14px;
   }

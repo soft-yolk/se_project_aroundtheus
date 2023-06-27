@@ -47,98 +47,7 @@
           ></button>
         </section>
         <section class="elements page__section">
-          <ul class="elements__cards">
-            <!-- <li class="elements__card">
-              <img
-                src="./images/yosemite.jpg"
-                alt="Yosemite Valley"
-                class="elements__image"
-              />
-              <div class="elements__description">
-                <h2 class="elements__title">Yosemite Valley</h2>
-                <button
-                  aria-label="like-button"
-                  type="button"
-                  class="elements__like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="elements__card">
-              <img
-                src="./images/lake-louise.jpg"
-                alt="Lake Louise"
-                class="elements__image"
-              />
-              <div class="elements__description">
-                <h2 class="elements__title">Lake Louise</h2>
-                <button
-                  aria-label="like-button"
-                  type="button"
-                  class="elements__like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="elements__card">
-              <img
-                src="./images/bald-mountains.jpg"
-                alt="Bald Mountains"
-                class="elements__image"
-              />
-              <div class="elements__description">
-                <h2 class="elements__title">Bald Mountains</h2>
-                <button
-                  aria-label="like-button"
-                  type="button"
-                  class="elements__like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="elements__card">
-              <img
-                src="./images/latemar.jpg"
-                alt="Latemar"
-                class="elements__image"
-              />
-              <div class="elements__description">
-                <h2 class="elements__title">Latemar</h2>
-                <button
-                  aria-label="like-button"
-                  type="button"
-                  class="elements__like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="elements__card">
-              <img
-                src="./images/vanoise.jpg"
-                alt="Vanoise"
-                class="elements__image"
-              />
-              <div class="elements__description">
-                <h2 class="elements__title">Vanoise National Park</h2>
-                <button
-                  aria-label="like-button"
-                  type="button"
-                  class="elements__like-button"
-                ></button>
-              </div>
-            </li>
-            <li class="elements__card">
-              <img
-                src="./images/lago.jpg"
-                alt="Lago di Braies"
-                class="elements__image"
-              />
-              <div class="elements__description">
-                <h2 class="elements__title">Lago di Braies</h2>
-                <button
-                  aria-label="like-button"
-                  type="button"
-                  class="elements__like-button"
-                ></button>
-              </div>
-            </li> -->
-          </ul>
+          <ul class="elements__cards"></ul>
         </section>
       </main>
       <footer class="footer page__section">
@@ -147,24 +56,32 @@
     </div>
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
-        <button class="modal__close" id="modal-button-close"></button>
-        <p class="modal__heading">Edit Profile</p>
+        <button
+          type="button"
+          class="modal__close"
+          id="modal-button-close"
+        ></button>
+        <h3 class="modal__heading">Edit Profile</h3>
         <form class="modal__form">
           <fieldset class="modal__fieldset">
             <input
+              class="modal__input"
               id="name-modal-input"
               type="text"
               name="name"
               placeholder="Name"
+              required
             />
             <input
+              class="modal__input"
               id="description-modal-input"
               type="text"
               name="description"
               placeholder="About me"
+              required
             />
           </fieldset>
-          <button class="modal__button">Save</button>
+          <button type="submit" class="modal__button">Save</button>
         </form>
       </div>
     </div>
@@ -183,6 +100,6 @@
       </li>
     </template>
 
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/index.js" defer></script>
   </body>
 </html>
