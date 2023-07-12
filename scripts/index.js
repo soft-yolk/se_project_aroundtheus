@@ -79,6 +79,7 @@ function handleAddNewCardSubmit(event) {
   event.preventDefault();
   const name = addCardTitleInput.value;
   const link = addCardUrlInput.value;
+  addCardForm.reset();
   renderCard({ name, link }, cardsWrap);
   closePopup(addCardModal);
 }
@@ -89,7 +90,6 @@ function getCardElement(elementData) {
   const elementTitle = cardElement.querySelector(".elements__title");
   const likeButton = cardElement.querySelector(".elements__like-button");
   const trashButton = cardElement.querySelector(".elements__trash-button");
-  const cardImage = cardElement.querySelector(".elements__image");
 
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("elements__like-button_active");
@@ -99,19 +99,15 @@ function getCardElement(elementData) {
     cardElement.remove();
   });
 
-  cardImage.addEventListener("click", () => {
+  elementImage.addEventListener("click", () => {
     openPopup(previewImageModalWindow);
     previewImageModal.alt = elementData.name;
     previewImageModal.src = elementData.link;
     previewTitle.textContent = elementData.name;
   });
 
-  previewCloseButton.addEventListener("click", () => {
-    closePopup(previewImageModalWindow);
-  });
-
   elementTitle.textContent = elementData.name;
-  elementTitle.alt = elementData.name;
+  elementImage.alt = elementData.name;
   elementImage.src = elementData.link;
   return cardElement;
 }
@@ -130,8 +126,13 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardForm.addEventListener("submit", handleAddNewCardSubmit);
 
 addNewCardButton.addEventListener("click", () => openPopup(addCardModal));
+
 addCardModalCloseButton.addEventListener("click", () =>
   closePopup(addCardModal)
 );
+
+previewCloseButton.addEventListener("click", () => {
+  closePopup(previewImageModalWindow);
+});
 
 initialCards.forEach((elementData) => renderCard(elementData, cardsWrap));
