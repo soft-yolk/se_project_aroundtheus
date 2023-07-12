@@ -28,4 +28,8 @@ In this stage of the sprint, I've added a grid that that is responsive, along wi
 
 Sprint 4 covers Javascript, DOM, and GIT. This project uses Javascript to toggle our modal and allow text fields to be updated through forms. The elements of the page are now rendered via a template element.
 
+#### Sprint 5 Progress
+
+This sprint makes substantial progress by adding yet another modal that shows the larger image of each element, as well as a window to add a card to the library. The Javascript lessons cover interactivity using the DOM.
+
 [Link to GitHub Pages](https://soft-yolk.github.io/se_project_aroundtheus/)
