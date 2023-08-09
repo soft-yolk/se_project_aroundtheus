@@ -53,6 +53,7 @@ const previewImageModalWindow = document.querySelector("#modal-preview");
 const previewImageModal = document.querySelector("#preview-image-modal");
 const previewTitle = document.querySelector(".modal__title");
 const previewCloseButton = document.querySelector(".modal__close-preview");
+const modal = document.querySelector(".modal");
 
 //FUNCTIONS----------------------
 function closePopup(modal) {
@@ -133,6 +134,33 @@ addCardModalCloseButton.addEventListener("click", () =>
 
 previewCloseButton.addEventListener("click", () => {
   closePopup(previewImageModalWindow);
+});
+
+// document.addEventListener("keydown", (event) => {
+//   if (event.key === "Escape") {
+//     closePopup(addCardModal);
+//     closePopup(previewImageModalWindow);
+//     closePopup(profileEditModal);
+//   }
+// });
+
+[profileEditModal, addCardModal, previewImageModalWindow].forEach((modal) => {
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closePopup(modal);
+    }
+  });
+});
+
+[profileEditModal, addCardModal, previewImageModalWindow].forEach((modal) => {
+  modal.addEventListener("mousedown", (event) => {
+    if (
+      event.target.classList.contains("modal") ||
+      event.target.classList.contains("modal__button")
+    ) {
+      closePopup(modal);
+    }
+  });
 });
 
 initialCards.forEach((elementData) => renderCard(elementData, cardsWrap));

@@ -32,4 +32,8 @@ Sprint 4 covers Javascript, DOM, and GIT. This project uses Javascript to toggle
 
 This sprint makes substantial progress by adding yet another modal that shows the larger image of each element, as well as a window to add a card to the library. The Javascript lessons cover interactivity using the DOM.
 
+#### Sprint 6 Progress
+
+Sprint 6 covers javascript validation. In this project, there has been more features added to closing the modals. Pressing the escape key as well as clicking outside of the modal closes the window. The user is also binded to using a set amount of characters in each text field.
+
 [Link to GitHub Pages](https://soft-yolk.github.io/se_project_aroundtheus/)
