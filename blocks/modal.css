@@ -84,8 +84,7 @@
   flex-direction: column;
   border: none;
   padding: 0;
-  margin: 54px 0 48px 0;
-  gap: 30px;
+  margin: 24px 0 48px 0;
 }
 
 .modal__input {
@@ -94,6 +93,12 @@
   padding: 0 0 13px 0;
   font-size: 14px;
   line-height: 1.2;
+
+  margin-top: 30px;
+}
+
+.modal__input_type_error {
+  border-bottom: 1px solid #ff0000(0, 0, 0, 0.2);
 }
 
 .modal__button {
@@ -135,6 +140,23 @@
   font-size: 12px;
   font-weight: 400;
   margin-top: 10px;
+}
+
+.modal__error {
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+  opacity: 0;
+  position: relative;
+  top: 5px;
+  transition: opacity 0.3s;
+}
+
+.modal__error_visible {
+  opacity: 1;
+}
+.modal__input_type_error {
+  color: #ff0000;
 }
 
 @media screen and (max-width: 640px) {
