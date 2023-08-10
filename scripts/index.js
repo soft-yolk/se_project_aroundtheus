@@ -60,7 +60,7 @@ const modal = document.querySelector(".modal");
 function closeByEscape(evt) {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector(".modal_opened");
-    closePopup(modal);
+    closePopup(openedPopup);
   }
 }
 function closePopup(modal) {
