@@ -50,7 +50,7 @@
   opacity: 60%;
 }
 
-.modal__close-preview {
+/* .modal__close-preview {
   position: absolute;
   top: -46px;
   right: -46px;
@@ -63,8 +63,8 @@
   background-color: transparent;
   transition: opacity 0.5s ease-in;
   cursor: pointer;
-  /* display: none; */
-}
+} */
+
 .modal__close-preview:hover {
   opacity: 60%;
 }

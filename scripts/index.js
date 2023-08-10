@@ -52,16 +52,25 @@ const elementCardList = document.querySelector(".elements__cards");
 const previewImageModalWindow = document.querySelector("#modal-preview");
 const previewImageModal = document.querySelector("#preview-image-modal");
 const previewTitle = document.querySelector(".modal__title");
-const previewCloseButton = document.querySelector(".modal__close-preview");
+const previewCloseButton =
+  previewImageModalWindow.querySelector(".modal__close");
 const modal = document.querySelector(".modal");
 
 //FUNCTIONS----------------------
+function closeByEscape(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".modal_opened");
+    closePopup(modal);
+  }
+}
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeByEscape);
 }
 
 function openPopup(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", closeByEscape);
 }
 
 function renderCard(elementData, wrapper) {
@@ -120,43 +129,16 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = profileDescription.textContent;
 });
 
-profileModalCloseButton.addEventListener("click", () =>
-  closePopup(profileEditModal)
-);
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardForm.addEventListener("submit", handleAddNewCardSubmit);
 
 addNewCardButton.addEventListener("click", () => openPopup(addCardModal));
 
-addCardModalCloseButton.addEventListener("click", () =>
-  closePopup(addCardModal)
-);
-
-previewCloseButton.addEventListener("click", () => {
-  closePopup(previewImageModalWindow);
-});
-
-// document.addEventListener("keydown", (event) => {
-//   if (event.key === "Escape") {
-//     closePopup(addCardModal);
-//     closePopup(previewImageModalWindow);
-//     closePopup(profileEditModal);
-//   }
-// });
-
-[profileEditModal, addCardModal, previewImageModalWindow].forEach((modal) => {
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closePopup(modal);
-    }
-  });
-});
-
 [profileEditModal, addCardModal, previewImageModalWindow].forEach((modal) => {
   modal.addEventListener("mousedown", (event) => {
     if (
       event.target.classList.contains("modal") ||
-      event.target.classList.contains("modal__button")
+      event.target.classList.contains("modal__close")
     ) {
       closePopup(modal);
     }
