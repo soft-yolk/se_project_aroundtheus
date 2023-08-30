@@ -1,6 +1,9 @@
 import { openPopup } from "../utils/utils.js";
+const previewImageModalWindow = document.querySelector("#modal-preview");
+const previewImageModal = document.querySelector("#preview-image-modal");
+const previewTitle = document.querySelector(".modal__title");
 
-export default class Card {
+class Card {
   constructor({ name, link }, cardSelector) {
     this._name = name;
     this._link = link;
@@ -15,11 +18,13 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._cardElement
-      .querySelector(".elements__like-button")
-      .addEventListener("click", () => {
-        this._handleLikeIcon();
-      });
+    this._likeButton = this._cardElement.querySelector(
+      ".elements__like-button"
+    );
+
+    this._likeButton.addEventListener("click", () => {
+      this._handleLikeIcon();
+    });
 
     this._cardElement
       .querySelector(".elements__trash-button")
@@ -27,17 +32,13 @@ export default class Card {
         this._handleTrashCard();
       });
 
-    this._cardElement
-      .querySelector(".elements__image")
-      .addEventListener("click", () => {
-        this._handleOpenPreview();
-      });
+    this._cardImage.addEventListener("click", () => {
+      this._handleOpenPreview();
+    });
   }
 
   _handleLikeIcon() {
-    this._cardElement
-      .querySelector(".elements__like-button")
-      .classList.toggle("elements__like-button_active");
+    this._likeButton.classList.toggle("elements__like-button_active");
   }
 
   _handleTrashCard() {
@@ -46,13 +47,10 @@ export default class Card {
   }
 
   _handleOpenPreview() {
-    this._previewImageModalWindow = document.querySelector("#modal-preview");
-    this._previewImageModal = document.querySelector("#preview-image-modal");
-    this._previewTitle = document.querySelector(".modal__title");
-    this._previewImageModal.src = this._link;
-    this._previewImageModal.alt = this._name;
-    this._previewTitle.textContent = this._name;
-    openPopup(this._previewImageModalWindow);
+    previewImageModal.src = this._link;
+    previewImageModal.alt = this._name;
+    previewTitle.textContent = this._name;
+    openPopup(previewImageModalWindow);
   }
 
   getView() {
@@ -71,3 +69,4 @@ export default class Card {
     this._cardImage.src = this._link;
   }
 }
+export default Card;

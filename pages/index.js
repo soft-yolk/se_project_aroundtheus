@@ -39,14 +39,10 @@ const cardsWrap = document.querySelector(".elements__cards");
 const profileEditButton = document.querySelector("#profile-edit-button");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const addCardModal = document.querySelector("#add-card-modal");
-// const addCardModalCloseButton = addCardModal.querySelector(".modal__close");
 const addCardForm = addCardModal.querySelector(".modal__form");
-
 const addCardTitleInput = addCardForm.querySelector("#title-modal-input");
 const addCardUrlInput = addCardForm.querySelector("#image-url-modal-input");
-
 const profileEditModal = document.querySelector("#profile-edit-modal");
-// const profileModalCloseButton = profileEditModal.querySelector(".modal__close");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const profileNameInput = document.querySelector("#name-modal-input");
@@ -54,16 +50,7 @@ const profileDescriptionInput = document.querySelector(
   "#description-modal-input"
 );
 const profileEditForm = profileEditModal.querySelector(".modal__form");
-
-// const elementTemplate =
-//   document.querySelector("#element-template").content.firstElementChild;
-// const elementCardList = document.querySelector(".elements__cards");
 const previewImageModalWindow = document.querySelector("#modal-preview");
-// const previewImageModal = document.querySelector("#preview-image-modal");
-// const previewTitle = document.querySelector(".modal__title");
-// const previewCloseButton =
-//   previewImageModalWindow.querySelector(".modal__close");
-// const modal = document.querySelector(".modal");
 
 //FUNCTIONS----------------------
 
@@ -91,6 +78,7 @@ function handleAddNewCardSubmit(event) {
 //EVENT LISTENERS----------------------
 profileEditButton.addEventListener("click", () => {
   openPopup(profileEditModal);
+  editFormValidator.resetValidation();
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 });
@@ -100,6 +88,7 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardForm.addEventListener("submit", handleAddNewCardSubmit);
 
 addNewCardButton.addEventListener("click", () => {
+  addFormValidator.resetValidation();
   openPopup(addCardModal);
 });
 
