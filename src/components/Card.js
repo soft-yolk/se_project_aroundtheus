@@ -2,7 +2,7 @@ const previewImageModalWindow = document.querySelector("#modal-preview");
 const previewImageModal = document.querySelector("#preview-image-modal");
 const previewTitle = document.querySelector(".modal__title");
 
-class Card {
+export default class Card {
   constructor({ name, link }, cardSelector) {
     this._name = name;
     this._link = link;
@@ -68,4 +68,3 @@ class Card {
     this._cardImage.src = this._link;
   }
 }
-export default Card;

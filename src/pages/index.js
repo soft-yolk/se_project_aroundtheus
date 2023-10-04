@@ -76,14 +76,14 @@ function renderCard(cardData) {
 
 cardsSection.renderItems();
 
-function handleProfileEditSubmit(event) {
+function handleProfileEditSubmit(formData) {
   // event.preventDefault();
-  userInfo.setUserInfo(data);
-  newCardPopup.close();
+  userInfo.setUserInfo(formData.userName, formData.userJob);
+  editProfilePopup.close();
   // closePopup(profileEditModal);
 }
 
-function handleAddNewCardSubmit(event) {
+function handleAddNewCardSubmit() {
   // event.preventDefault();
   const name = addCardTitleInput.value;
   const link = addCardUrlInput.value;
@@ -95,7 +95,7 @@ function handleAddNewCardSubmit(event) {
 
 //EVENT LISTENERS----------------------
 profileEditButton.addEventListener("click", () => {
-  newCardPopup.open();
+  editProfilePopup.open();
   // openPopup(profileEditModal);
   editFormValidator.resetValidation();
   profileNameInput.value = profileName.textContent;

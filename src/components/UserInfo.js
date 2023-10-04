@@ -12,8 +12,9 @@ export default class UserInfo {
   }
 
   setUserInfo(userName, userJob) {
+    console.log(userName);
     this._name.textContent = userName;
     this._job.textContent = userJob;
-    console.log(userName);
+    console.log(this._name.textContent);
   }
 }
