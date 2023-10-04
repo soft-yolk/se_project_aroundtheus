@@ -1,4 +1,3 @@
-import { openPopup } from "../utils/utils.js";
 const previewImageModalWindow = document.querySelector("#modal-preview");
 const previewImageModal = document.querySelector("#preview-image-modal");
 const previewTitle = document.querySelector(".modal__title");

@@ -10,7 +10,6 @@
       content="Karina's third project with Practicum, showcasing a site that uses a grid."
     />
     <meta name="keywords" content="HTML, CSS" />
-    <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
     <link rel="icon" href="favicon.ico" />
     <title>Around the U.S.</title>
   </head>
@@ -19,7 +18,7 @@
       <header class="header page__section">
         <img
           class="header__logo"
-          src="./images/logo.svg"
+          src="<%=require('./images/logo.svg')%>"
           alt="Around the US logo"
         />
       </header>
@@ -28,7 +27,7 @@
           <img
             class="profile__image"
             alt="Jacques' profile image"
-            src="./images/avatar.jpg"
+            src="<%=require('./images/avatar.jpg')%>"
           />
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
@@ -164,7 +163,6 @@
       </li>
     </template>
 
-    <script src="./pages/index.js" defer type="module"></script>
     <script src="./components/FormValidator.js" defer type="module"></script>
     <!-- <script src="./components/validation.js" defer></script> -->
   </body>
