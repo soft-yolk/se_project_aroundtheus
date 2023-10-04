@@ -2,7 +2,6 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 // import { closeByEscape, closePopup, openPopup } from "../utils/utils.js";
 import "./index.css";
-import Popup from "../components/Popup.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
@@ -58,17 +57,28 @@ const profileDescriptionInput = document.querySelector(
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 const previewImageModalWindow = document.querySelector("#modal-preview");
 
+//Section Render
+
+const cardsSection = new Section(
+  {
+    items: initialCards,
+    renderer: renderCard,
+  },
+  ".elements__cards"
+);
+
 //FUNCTIONS----------------------
 
-function renderCard(cardData, wrapper) {
+function renderCard(cardData) {
   const card = new Card(cardData, "#element-template");
-  wrapper.prepend(card.getView());
+  cardsSection.addItem(card.getView());
 }
 
+cardsSection.renderItems();
+
 function handleProfileEditSubmit(event) {
-  event.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
+  // event.preventDefault();
+  userInfo.setUserInfo(data);
   newCardPopup.close();
   // closePopup(profileEditModal);
 }
@@ -155,13 +165,3 @@ imagePopup.setEventListeners();
 //User Info Render
 
 const userInfo = new UserInfo(".profile__name", ".profile__description");
-
-//Section Render
-const cardsSection = new Section(
-  {
-    items: initialCards,
-    renderer: renderCard,
-  },
-  ".elements__cards"
-);
-cardsSection.renderItems();
