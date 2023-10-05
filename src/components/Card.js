@@ -1,12 +1,13 @@
-const previewImageModalWindow = document.querySelector("#modal-preview");
-const previewImageModal = document.querySelector("#preview-image-modal");
-const previewTitle = document.querySelector(".modal__title");
+// const previewImageModalWindow = document.querySelector("#modal-preview");
+// const previewImageModal = document.querySelector("#preview-image-modal");
+// const previewTitle = document.querySelector(".modal__title");
 
 export default class Card {
-  constructor({ name, link }, cardSelector) {
+  constructor({ name, link }, cardSelector, handleImageClick) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._handleImageClick = handleImageClick;
   }
 
   _getTemplate() {
@@ -32,7 +33,7 @@ export default class Card {
       });
 
     this._cardImage.addEventListener("click", () => {
-      this._handleOpenPreview();
+      this._handleImageClick(this._cardImage);
     });
   }
 
@@ -45,12 +46,13 @@ export default class Card {
     this._cardElement = null;
   }
 
-  _handleOpenPreview() {
-    previewImageModal.src = this._link;
-    previewImageModal.alt = this._name;
-    previewTitle.textContent = this._name;
-    openPopup(previewImageModalWindow);
-  }
+  // _handleOpenPreview() {
+  //   previewImageModal.src = this._link;
+  //   previewImageModal.alt = this._name;
+  //   previewTitle.textContent = this._name;
+  //   openPopup(previewImageModalWindow);
+  //   // previewImageModal.classList.add("modal_opened");
+  // }
 
   getView() {
     this._cardElement = this._getTemplate();

@@ -70,27 +70,40 @@ const cardsSection = new Section(
 //FUNCTIONS----------------------
 
 function renderCard(cardData) {
-  const card = new Card(cardData, "#element-template");
+  const card = new Card(cardData, "#element-template", () =>
+    handleImageClick(cardData)
+  );
   cardsSection.addItem(card.getView());
+}
+
+function handleImageClick(cardData) {
+  imagePopup.open(cardData.name, cardData.link);
 }
 
 cardsSection.renderItems();
 
-function handleProfileEditSubmit(formData) {
-  // event.preventDefault();
-  userInfo.setUserInfo(formData.userName, formData.userJob);
+//User Info Render
+
+const userInfo = new UserInfo(".profile__name", ".profile__description");
+
+function fillUserInfo() {
+  const userData = userInfo.getUserInfo();
+  profileNameInput.value = userData.userName;
+  profileDescriptionInput.value = userData.userJob;
+}
+
+function handleProfileEditSubmit(userData) {
+  userInfo.setUserInfo(userData);
+  fillUserInfo();
   editProfilePopup.close();
-  // closePopup(profileEditModal);
 }
 
 function handleAddNewCardSubmit() {
-  // event.preventDefault();
   const name = addCardTitleInput.value;
   const link = addCardUrlInput.value;
   addCardForm.reset();
   renderCard({ name, link }, cardsWrap);
   newCardPopup.close();
-  // closePopup(addCardModal);
 }
 
 //EVENT LISTENERS----------------------
@@ -161,7 +174,3 @@ editProfilePopup.setEventListeners();
 
 const imagePopup = new PopupWithImage("#modal-preview");
 imagePopup.setEventListeners();
-
-//User Info Render
-
-const userInfo = new UserInfo(".profile__name", ".profile__description");
