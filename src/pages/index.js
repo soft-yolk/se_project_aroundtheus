@@ -1,6 +1,5 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-// import { closeByEscape, closePopup, openPopup } from "../utils/utils.js";
 import "./index.css";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -86,15 +85,14 @@ cardsSection.renderItems();
 
 const userInfo = new UserInfo(".profile__name", ".profile__description");
 
-function fillUserInfo() {
-  const userData = userInfo.getUserInfo();
-  profileNameInput.value = userData.userName;
-  profileDescriptionInput.value = userData.userJob;
-}
-
-function handleProfileEditSubmit(userData) {
+function handleProfileEditSubmit() {
+  const name = profileNameInput.value;
+  const about = profileDescriptionInput.value;
+  const userData = {
+    name: name,
+    about: about,
+  };
   userInfo.setUserInfo(userData);
-  fillUserInfo();
   editProfilePopup.close();
 }
 
@@ -109,20 +107,18 @@ function handleAddNewCardSubmit() {
 //EVENT LISTENERS----------------------
 profileEditButton.addEventListener("click", () => {
   editProfilePopup.open();
-  // openPopup(profileEditModal);
   editFormValidator.resetValidation();
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 });
 
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+// profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
-addCardForm.addEventListener("submit", handleAddNewCardSubmit);
+// addCardForm.addEventListener("submit", handleAddNewCardSubmit);
 
 addNewCardButton.addEventListener("click", () => {
   addFormValidator.resetValidation();
   newCardPopup.open();
-  // openPopup(addCardModal);
 });
 
 // [profileEditModal, addCardModal, previewImageModalWindow].forEach((modal) => {
@@ -137,7 +133,7 @@ addNewCardButton.addEventListener("click", () => {
 // });
 
 //RENDER--------------------------
-initialCards.forEach((elementData) => renderCard(elementData, cardsWrap));
+// initialCards.forEach((elementData) => renderCard(elementData, cardsWrap));
 
 const config = {
   formSelector: ".modal__form",
