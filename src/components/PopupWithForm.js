@@ -13,7 +13,7 @@ export default class PopupWithForm extends Popup {
   }
 
   //collects data from all the input fields and returns that data as an object
-  _getInputValues() {
+  getInputValues() {
     const inputs = this._popupElement.querySelectorAll(".modal__input");
     const data = {};
     inputs.forEach((input) => {
@@ -22,20 +22,11 @@ export default class PopupWithForm extends Popup {
     return data;
   }
 
-  // _getInputValues() {
-  //   const inputs = this._popupForm.querySelectorAll(".modal__input");
-  //   const data = {};
-  //   inputs.forEach((input) => {
-  //     data[input.name] = input.value;
-  //   });
-  //   return data;
-  // }
-
   setEventListeners() {
     super.setEventListeners();
     this._popupElement.addEventListener("submit", (event) => {
       event.preventDefault();
-      this.handleFormSubmit(this._getInputValues);
+      this.handleFormSubmit(this.getInputValues());
       this.close();
     });
   }

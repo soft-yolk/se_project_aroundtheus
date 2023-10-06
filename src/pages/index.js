@@ -5,33 +5,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Card from "../components/Card.js";
-
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
+import { initialCards, config } from "../utils/constants.js";
 
 const cardData = {
   name: "Yosemite Valley",
@@ -68,11 +42,16 @@ const cardsSection = new Section(
 
 //FUNCTIONS----------------------
 
-function renderCard(cardData) {
+function createCard(cardData) {
   const card = new Card(cardData, "#element-template", () =>
     handleImageClick(cardData)
   );
-  cardsSection.addItem(card.getView());
+  return card.getView();
+}
+
+function renderCard(cardData) {
+  const card = createCard(cardData);
+  cardsSection.addItem(card);
 }
 
 function handleImageClick(cardData) {
@@ -86,21 +65,13 @@ cardsSection.renderItems();
 const userInfo = new UserInfo(".profile__name", ".profile__description");
 
 function handleProfileEditSubmit() {
-  const name = profileNameInput.value;
-  const about = profileDescriptionInput.value;
-  const userData = {
-    name: name,
-    about: about,
-  };
+  const userData = editProfilePopup.getInputValues();
   userInfo.setUserInfo(userData);
   editProfilePopup.close();
 }
 
-function handleAddNewCardSubmit() {
-  const name = addCardTitleInput.value;
-  const link = addCardUrlInput.value;
-  addCardForm.reset();
-  renderCard({ name, link }, cardsWrap);
+function handleAddNewCardSubmit(cardData) {
+  renderCard(cardData, cardsWrap);
   newCardPopup.close();
 }
 
@@ -108,41 +79,15 @@ function handleAddNewCardSubmit() {
 profileEditButton.addEventListener("click", () => {
   editProfilePopup.open();
   editFormValidator.resetValidation();
-  profileNameInput.value = profileName.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
+  userInfo.getUserInfo;
 });
-
-// profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-
-// addCardForm.addEventListener("submit", handleAddNewCardSubmit);
 
 addNewCardButton.addEventListener("click", () => {
   addFormValidator.resetValidation();
   newCardPopup.open();
 });
 
-// [profileEditModal, addCardModal, previewImageModalWindow].forEach((modal) => {
-//   modal.addEventListener("mousedown", (event) => {
-//     if (
-//       event.target.classList.contains("modal") ||
-//       event.target.classList.contains("modal__close")
-//     ) {
-//       closePopup(modal);
-//     }
-//   });
-// });
-
 //RENDER--------------------------
-// initialCards.forEach((elementData) => renderCard(elementData, cardsWrap));
-
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
 
 const addFormValidator = new FormValidator(config, addCardForm);
 addFormValidator.enableValidation();
