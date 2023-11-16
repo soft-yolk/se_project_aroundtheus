@@ -6,6 +6,8 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Card from "../components/Card.js";
 import { initialCards, config } from "../utils/constants.js";
+import Api from "../components/Api.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 const cardData = {
   name: "Yosemite Valley",
@@ -29,6 +31,7 @@ const profileDescriptionInput = document.querySelector(
 );
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 const previewImageModalWindow = document.querySelector("#modal-preview");
+const profileImage = document.querySelector(".profile__image");
 
 //Section Render
 
@@ -39,6 +42,18 @@ const cardsSection = new Section(
   },
   ".elements__cards"
 );
+
+//API Render
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "fd96ab9c-850a-4647-8171-f92858b5cf89",
+    "Content-Type": "application/json",
+  },
+});
+
+api.getInitialCards();
+api.getUserInfo();
 
 //FUNCTIONS----------------------
 
@@ -62,7 +77,11 @@ cardsSection.renderItems();
 
 //User Info Render
 
-const userInfo = new UserInfo(".profile__name", ".profile__description");
+const userInfo = new UserInfo(
+  ".profile__name",
+  ".profile__description",
+  ".profile__image"
+);
 
 function handleProfileEditSubmit(userData) {
   // const userData = editProfilePopup.getInputValues();
@@ -118,3 +137,8 @@ editProfilePopup.setEventListeners();
 
 const imagePopup = new PopupWithImage("#modal-preview");
 imagePopup.setEventListeners();
+
+//Confirm Delete Popup Render
+
+const confirmDelete = new PopupWithConfirmation("#confirm-modal");
+confirmDelete.setEventListeners();
