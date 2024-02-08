@@ -43,6 +43,14 @@ const cardsSection = new Section(
   ".elements__cards"
 );
 
+//User Info Render
+
+const userInfo = new UserInfo(
+  ".profile__name",
+  ".profile__description",
+  ".profile__image"
+);
+
 //API Render
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -52,8 +60,23 @@ const api = new Api({
   },
 });
 
-api.getInitialCards();
-api.getUserInfo();
+api
+  .getInitialCards()
+  .then(() => {
+    cardsSection.renderItems();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+api
+  .getUserInfo()
+  .then((userData) => {
+    userInfo.setUserInfo(userData.name, userData.about);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 //FUNCTIONS----------------------
 
@@ -73,25 +96,60 @@ function handleImageClick(cardData) {
   imagePopup.open(cardData.name, cardData.link);
 }
 
-cardsSection.renderItems();
+function handleSubmitMessage(
+  request,
+  popupInstance,
+  loadingText = "Saving..."
+) {
+  popupInstance.renderLoading(true, loadingText);
+  request()
+    .then(() => {
+      popupInstance.close();
+    })
+    // we need to catch possible errors
+    // console.error is used to handle errors if you don’t have any other ways for that
+    .catch(console.error)
+    // in `finally` we need to return the initial button text back in any case
+    .finally(() => {
+      popupInstance.renderLoading(false);
+    });
+}
 
-//User Info Render
+// cardsSection.renderItems();
 
-const userInfo = new UserInfo(
-  ".profile__name",
-  ".profile__description",
-  ".profile__image"
-);
-
-function handleProfileEditSubmit(userData) {
+function handleProfileEditSubmit(inputValues) {
   // const userData = editProfilePopup.getInputValues();
-  userInfo.setUserInfo(userData);
+  function makeRequest() {
+    return api.updateProfileInfo(inputValues).then((userData) => {
+      userInfo.setUserInfo(userData);
+    });
+  }
+  // userInfo.setUserInfo();
   editProfilePopup.close();
+  handleSubmitMessage(makeRequest, profileEditModal);
 }
 
 function handleAddNewCardSubmit(cardData) {
   renderCard(cardData, cardsWrap);
   newCardPopup.close();
+}
+
+function handleDeleteButton(cardID, card) {
+  confirmDelete.open();
+  confirmDelete.handleYesAction(() => {
+    confirmDelete.setLoading(true);
+    api
+      .deleteCard(cardID)
+      .then(() => {
+        confirmDelete.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        confirmDelete.setLoading(false);
+      });
+  });
 }
 
 //EVENT LISTENERS----------------------
