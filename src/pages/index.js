@@ -32,6 +32,7 @@ const profileDescriptionInput = document.querySelector(
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 const previewImageModalWindow = document.querySelector("#modal-preview");
 const profileImage = document.querySelector(".profile__image");
+const deleteButton = document.querySelector(".elements__trash-button");
 
 //Section Render
 
@@ -81,8 +82,11 @@ api
 //FUNCTIONS----------------------
 
 function createCard(cardData) {
-  const card = new Card(cardData, "#element-template", () =>
-    handleImageClick(cardData)
+  const card = new Card(
+    cardData,
+    "#element-template",
+    () => handleImageClick(cardData),
+    handleDeleteButton
   );
   return card.getView();
 }
@@ -92,28 +96,41 @@ function renderCard(cardData) {
   cardsSection.addItem(card);
 }
 
+//Image Popup Render
+
+const imagePopup = new PopupWithImage("#modal-preview");
+imagePopup.setEventListeners();
+
 function handleImageClick(cardData) {
   imagePopup.open(cardData.name, cardData.link);
 }
 
-function handleSubmitMessage(
-  request,
-  popupInstance,
-  loadingText = "Saving..."
-) {
-  popupInstance.renderLoading(true, loadingText);
-  request()
-    .then(() => {
-      popupInstance.close();
-    })
-    // we need to catch possible errors
-    // console.error is used to handle errors if you don’t have any other ways for that
-    .catch(console.error)
-    // in `finally` we need to return the initial button text back in any case
-    .finally(() => {
-      popupInstance.renderLoading(false);
-    });
-}
+// function handleSubmitMessage(
+//   request,
+//   popupInstance,
+//   loadingText = "Saving..."
+// ) {
+//   popupInstance.renderLoading(true, loadingText);
+//   request()
+//     .then(() => {
+//       popupInstance.close();
+//     })
+//     // we need to catch possible errors
+//     // console.error is used to handle errors if you don’t have any other ways for that
+//     .catch(console.error)
+//     // in `finally` we need to return the initial button text back in any case
+//     .finally(() => {
+//       popupInstance.renderLoading(false);
+//     });
+// }
+
+// function handleProfileEditSubmit({ title, description }) {
+//   editProfilePopup.setLoading(true, "Saving ...");
+//   api.updateUserInfo({ title, description }).then((res) => {
+//     profileUserInfo.setUserInfo(res);
+//   });
+//   editProfilePopup.close();
+// }
 
 // cardsSection.renderItems();
 
@@ -134,13 +151,20 @@ function handleAddNewCardSubmit(cardData) {
   newCardPopup.close();
 }
 
+//Confirm Delete Popup Render
+
+const confirmDelete = new PopupWithConfirmation("#confirm-modal");
+confirmDelete.setEventListeners();
+
 function handleDeleteButton(cardID, card) {
+  console.log("Delete button clicked");
   confirmDelete.open();
   confirmDelete.handleYesAction(() => {
     confirmDelete.setLoading(true);
     api
       .deleteCard(cardID)
       .then(() => {
+        card.remove();
         confirmDelete.close();
       })
       .catch((err) => {
@@ -152,7 +176,13 @@ function handleDeleteButton(cardID, card) {
   });
 }
 
+const avatarPopup = new PopupWithForm("#avatar-modal", handleAvatarFormSubmit);
+avatarPopup.setEventListeners();
+
 //EVENT LISTENERS----------------------
+profileImage.addEventListener("click", () => {
+  avatarPopup.open();
+});
 profileEditButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
   profileNameInput.value = userData.name;
@@ -190,13 +220,3 @@ const editProfilePopup = new PopupWithForm(
   handleProfileEditSubmit
 );
 editProfilePopup.setEventListeners();
-
-//Image Popup Render
-
-const imagePopup = new PopupWithImage("#modal-preview");
-imagePopup.setEventListeners();
-
-//Confirm Delete Popup Render
-
-const confirmDelete = new PopupWithConfirmation("#confirm-modal");
-confirmDelete.setEventListeners();

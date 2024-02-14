@@ -13,6 +13,7 @@ export default class Api {
 
   getInitialCards() {
     return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+      method: "GET",
       headers: this.headers,
     }).then(this._checkServerResponse);
   }

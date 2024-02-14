@@ -13,18 +13,20 @@ export default class PopupWithConfirmation extends Popup {
     this._handleYesAction = action;
   }
 
-  setLoading(isLoading) {
-    if (isLoading) {
-      this._submitButton.textContent = "loading...";
-    } else {
-      this._submitButton.textContent = this._submitButtonText;
-    }
-  }
+  // setLoading(isLoading) {
+  //   if (isLoading) {
+  //     this._submitButton.textContent = "loading...";
+  //   } else {
+  //     this._submitButton.textContent = this._submitButtonText;
+  //   }
+  // }
 
   setEventListeners() {
     super.setEventListeners();
     this._confirmDelete.addEventListener("submit", (event) => {
       event.preventDefault();
+      this._handleYesAction();
+      this.close;
     });
   }
 }
