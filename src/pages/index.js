@@ -32,7 +32,7 @@ const profileDescriptionInput = document.querySelector(
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 const previewImageModalWindow = document.querySelector("#modal-preview");
 const profileImage = document.querySelector(".profile__image");
-const deleteButton = document.querySelector(".elements__trash-button");
+// const deleteButton = document.querySelector(".elements__trash-button");
 
 //Section Render
 
@@ -154,29 +154,30 @@ function handleAddNewCardSubmit(cardData) {
 //Confirm Delete Popup Render
 
 const confirmDelete = new PopupWithConfirmation("#confirm-modal");
-confirmDelete.setEventListeners();
+// confirmDelete.setEventListeners();
 
-function handleDeleteButton(cardID, card) {
+function handleDeleteButton() {
   console.log("Delete button clicked");
   confirmDelete.open();
-  confirmDelete.handleYesAction(() => {
-    confirmDelete.setLoading(true);
-    api
-      .deleteCard(cardID)
-      .then(() => {
-        card.remove();
-        confirmDelete.close();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        confirmDelete.setLoading(false);
-      });
-  });
+  //should only open.
+  // confirmDelete.handleYesAction(() => {
+  //   confirmDelete.setLoading(true);
+  //   api
+  //     .deleteCard(cardID)
+  //     .then(() => {
+  //       card.remove();
+  //       confirmDelete.close();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  //     .finally(() => {
+  //       confirmDelete.setLoading(false);
+  //     });
+  // });
 }
 
-const avatarPopup = new PopupWithForm("#avatar-modal", handleAvatarFormSubmit);
+const avatarPopup = new PopupWithForm("#profile-picture-modal");
 avatarPopup.setEventListeners();
 
 //EVENT LISTENERS----------------------
