@@ -22,14 +22,17 @@
   position: absolute;
   cursor: pointer;
   z-index: 1;
-  opacity: 1;
-  /* transform: translate(-50%, -50%); */
-  /* left: 60%;
-  top: 50%; */
+  opacity: 0;
+  left: 50px;
+  top: 90px;
+  transition: opacity 0.5s ease-in;
 }
 
-.profile__image:hover {
+.profile__container:hover .profile__image {
   opacity: 20%;
+}
+.profile__container:hover .profile__icon {
+  opacity: 1;
 }
 
 .profile__info {

@@ -24,16 +24,18 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            class="profile__image"
-            alt="Jacques' profile image"
-            src="<%=require('./images/avatar.jpg')%>"
-          />
-          <img
-            class="profile__icon"
-            alt="edit-icon"
-            src="<%require('./images/edit-icon.svg')%>"
-          />
+          <div class="profile__container">
+            <img
+              class="profile__image"
+              alt="Jacques' profile image"
+              src="<%=require('./images/avatar.jpg')%>"
+            />
+            <img
+              class="profile__icon"
+              alt="edit-icon"
+              src="<%require('./images/edit-icon.svg')%>"
+            />
+          </div>
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
             <button
