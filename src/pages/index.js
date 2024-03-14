@@ -73,7 +73,7 @@ api
 api
   .getUserInfo()
   .then((userData) => {
-    userInfo.setUserInfo(userData.name, userData.about);
+    userInfo.setUserInfo(userData);
   })
   .catch((err) => {
     console.error(err);
@@ -105,45 +105,18 @@ function handleImageClick(cardData) {
   imagePopup.open(cardData.name, cardData.link);
 }
 
-// function handleSubmitMessage(
-//   request,
-//   popupInstance,
-//   loadingText = "Saving..."
-// ) {
-//   popupInstance.renderLoading(true, loadingText);
-//   request()
-//     .then(() => {
-//       popupInstance.close();
-//     })
-//     // we need to catch possible errors
-//     // console.error is used to handle errors if you don’t have any other ways for that
-//     .catch(console.error)
-//     // in `finally` we need to return the initial button text back in any case
-//     .finally(() => {
-//       popupInstance.renderLoading(false);
-//     });
-// }
-
-// function handleProfileEditSubmit({ title, description }) {
-//   editProfilePopup.setLoading(true, "Saving ...");
-//   api.updateUserInfo({ title, description }).then((res) => {
-//     profileUserInfo.setUserInfo(res);
-//   });
-//   editProfilePopup.close();
-// }
-
-// cardsSection.renderItems();
-
-function handleProfileEditSubmit(inputValues) {
+function handleProfileEditSubmit({ name, about }) {
   // const userData = editProfilePopup.getInputValues();
-  function makeRequest() {
-    return api.updateProfileInfo(inputValues).then((userData) => {
+  return api
+    .updateProfileInfo(name, about)
+    .then((userData) => {
       userInfo.setUserInfo(userData);
+    })
+    .finally(() => {
+      editProfilePopup.close();
     });
-  }
   // userInfo.setUserInfo();
-  editProfilePopup.close();
-  handleSubmitMessage(makeRequest, profileEditModal);
+  // handleSubmitMessage(makeRequest, profileEditModal);
 }
 
 function handleAddNewCardSubmit(cardData) {
@@ -154,31 +127,25 @@ function handleAddNewCardSubmit(cardData) {
 //Confirm Delete Popup Render
 
 const confirmDelete = new PopupWithConfirmation("#confirm-modal");
-// confirmDelete.setEventListeners();
+confirmDelete.setEventListeners();
 
 function handleDeleteButton() {
   console.log("Delete button clicked");
   confirmDelete.open();
-  //should only open.
-  // confirmDelete.handleYesAction(() => {
-  //   confirmDelete.setLoading(true);
-  //   api
-  //     .deleteCard(cardID)
-  //     .then(() => {
-  //       card.remove();
-  //       confirmDelete.close();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  //     .finally(() => {
-  //       confirmDelete.setLoading(false);
-  //     });
-  // });
 }
 
-const avatarPopup = new PopupWithForm("#profile-picture-modal");
-avatarPopup.setEventListeners();
+//Handle Profile Pic Submit
+function handleAvatarFormSubmit(inputValues) {
+  api
+    .updateAvatar(inputValues.url)
+    .then((res) => {
+      profileUserInfo.setUserAvatar(inputValues.url);
+      avatarPopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 //EVENT LISTENERS----------------------
 profileImage.addEventListener("click", () => {
@@ -221,3 +188,11 @@ const editProfilePopup = new PopupWithForm(
   handleProfileEditSubmit
 );
 editProfilePopup.setEventListeners();
+
+//Profile Pic Popup
+
+const avatarPopup = new PopupWithForm(
+  "#profile-picture-modal",
+  handleAvatarFormSubmit
+);
+avatarPopup.setEventListeners();

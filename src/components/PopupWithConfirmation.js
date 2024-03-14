@@ -9,10 +9,6 @@ export default class PopupWithConfirmation extends Popup {
     this._submitButtonText = this._submitButton.textContent;
   }
 
-  handleYesAction(action) {
-    this._handleYesAction = action;
-  }
-
   // setLoading(isLoading) {
   //   if (isLoading) {
   //     this._submitButton.textContent = "loading...";
@@ -25,7 +21,6 @@ export default class PopupWithConfirmation extends Popup {
     super.setEventListeners();
     this._confirmDelete.addEventListener("submit", (event) => {
       event.preventDefault();
-      this._handleYesAction();
       this.close;
     });
   }

@@ -31,7 +31,7 @@ export default class Api {
     return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
       method: "PATCH",
       headers: this.headers,
-      body: JSON.stringify({ name: name, about: about }),
+      body: JSON.stringify({ name, about }),
     }).then(this._checkServerResponse);
   }
 
