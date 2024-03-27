@@ -12,7 +12,7 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+    return fetch(this.baseUrl + "/cards", {
       method: "GET",
       headers: this.headers,
     }).then(this._checkServerResponse);
@@ -20,7 +20,7 @@ export default class Api {
 
   //get user info
   getUserInfo() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
+    return fetch(this.baseUrl + "/users/me", {
       method: "GET",
       headers: this.headers,
     }).then(this._checkServerResponse);
@@ -28,7 +28,7 @@ export default class Api {
 
   //update profile info PATCH /users/me
   updateProfileInfo(name, about) {
-    return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
+    return fetch(this.baseUrl + "/users/me", {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({ name, about }),
@@ -36,22 +36,19 @@ export default class Api {
   }
 
   //update avatar PATCH /users/me/avatar
-  updateAvatar(avatar) {
-    return fetch(
-      "https://around-api.en.tripleten-services.com/v1/users/me/avatar",
-      {
-        method: "PATCH",
-        headers: this.headers,
-        body: JSON.stringify({ avatar: avatar }),
-      }
-    ).then(this._checkServerResponse);
+  updateAvatar(url) {
+    return fetch(this.baseUrl + "/users/me/avatar", {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({ avatar: url }),
+    }).then(this._checkServerResponse);
   }
 
   //CARD ROUTES---------------
 
   //create a card POST /cards
   createCard({ name, link }) {
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+    return fetch(this.baseUrl + "/cards", {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify({ name: name, link: link }),
@@ -59,35 +56,29 @@ export default class Api {
   }
 
   //delete a card DELETE /cards/:cardId
-  deleteCard() {
-    return fetch(
-      "https://around-api.en.tripleten-services.com/v1/cards/${_id}",
-      {
-        method: "DELETE",
-        headers: this.headers,
-      }
-    ).then(this._checkServerResponse);
+  deleteCard(cardId) {
+    return fetch(this.baseUrl + `/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this.headers,
+      body: JSON.stringify({
+        _id: cardId,
+      }),
+    }).then(this._checkServerResponse);
   }
 
   //like a card PUT /cards/:cardId/likes
-  likeCard() {
-    return fetch(
-      "https://around-api.en.tripleten-services.com/v1/cards/${_id}/likes",
-      {
-        method: "PUT",
-        headers: this.headers,
-      }
-    ).then(this._checkServerResponse);
+  likeCard(cardId, _isLiked) {
+    return fetch(this.baseUrl + `/cards/${cardId}/likes`, {
+      method: _isLiked ? "DELETE" : "PUT",
+      headers: this.headers,
+    }).then(this._checkServerResponse);
   }
 
   //dislike a card DELETE /cards/:cardId/likes
-  dislikeCard() {
-    return fetch(
-      "https://around-api.en.tripleten-services.com/v1/cards/${_id}/likes",
-      {
-        method: "DELETE",
-        headers: this.headers,
-      }
-    ).then(this._checkServerResponse);
+  dislikeCard(cardId) {
+    return fetch(this.baseUrl + `/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this.headers,
+    }).then(this._checkServerResponse);
   }
 }

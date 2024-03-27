@@ -35,7 +35,7 @@ export default class PopupWithForm extends Popup {
 
   setLoading(isLoading) {
     if (isLoading) {
-      this._submitButton.textContent = "loading...";
+      this._submitButton.textContent = "Saving...";
     } else {
       this._submitButton.textContent = this._submitButtonText;
     }

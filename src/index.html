@@ -26,14 +26,14 @@
         <section class="profile page__section">
           <div class="profile__container">
             <img
+              class="profile__icon"
+              alt="edit-icon"
+              src="<%=require('./images/edit-icon.svg')%>"
+            />
+            <img
               class="profile__image"
               alt="Jacques' profile image"
               src="<%=require('./images/avatar.jpg')%>"
-            />
-            <img
-              class="profile__icon"
-              alt="edit-icon"
-              src="<%require('./images/edit-icon.svg')%>"
             />
           </div>
           <div class="profile__info">
@@ -113,6 +113,7 @@
         </form>
       </div>
     </div>
+
     <!-- Edit Profile Pic Modal-->
     <div class="modal" id="profile-picture-modal">
       <div class="modal__container">
@@ -126,14 +127,13 @@
               type="url"
               name="link"
               placeholder="URL"
-              minlength="1"
               required
             />
-            <span class="modal__error" id="title-modal-input-error"
+            <span class="modal__error" id="profile-picture-modal-input-error"
               >error here</span
             >
           </fieldset>
-          <button disabled type="submit" class="modal__button">Save</button>
+          <button type="submit" class="modal__button">Save</button>
         </form>
       </div>
     </div>
