@@ -125,13 +125,35 @@ function handleImageClick(cardData) {
   imagePopup.open(cardData.name, cardData.link);
 }
 
+// function handleCardLike(card) {
+//   api
+//     .likeCard(card._id, card.isLiked())
+//     .then(() => {
+//       card.handleLikeIcon();
+//     })
+//     .catch(console.error);
+// }
+
 function handleCardLike(card) {
-  api
-    .likeCard(card._id, card.isLiked())
-    .then(() => {
-      card.handleLikeIcon();
-    })
-    .catch(console.error);
+  if (!card.isLiked) {
+    return api
+      .updateLike(card._id)
+      .then(() => {
+        card.setLikeStatus(true);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else {
+    return api
+      .removeLike(card._id)
+      .then(() => {
+        card.setLikeStatus(false);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 }
 
 function handleProfileEditSubmit({ name, about }) {
@@ -146,13 +168,12 @@ function handleProfileEditSubmit({ name, about }) {
 }
 
 function handleAddNewCardSubmit(cardData) {
-  // renderCard(cardData, cardsWrap);
   api
-    .createCard(cardData)
+    .addCard(cardData)
     .then((res) => {
       console.log(res);
       // const card = createCard(cardData);
-      createCard(res);
+      cardList.addItem(createCard(res));
       newCardPopup.close();
     })
     .catch((err) => {
@@ -166,9 +187,9 @@ const confirmDelete = new PopupWithConfirmation("#confirm-modal");
 confirmDelete.setEventListeners();
 
 function handleDeleteButton(card) {
-  console.log("Delete button clicked");
+  // console.log("Delete button clicked");
   confirmDelete.open();
-  console.log(card._id);
+  // console.log(card._id);
   confirmDelete.setSubmitAction(() => {
     api
       .deleteCard(card._id)

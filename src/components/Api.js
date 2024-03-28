@@ -47,7 +47,7 @@ export default class Api {
   //CARD ROUTES---------------
 
   //create a card POST /cards
-  createCard({ name, link }) {
+  addCard({ name, link }) {
     return fetch(this.baseUrl + "/cards", {
       method: "POST",
       headers: this.headers,
@@ -66,19 +66,32 @@ export default class Api {
     }).then(this._checkServerResponse);
   }
 
-  //like a card PUT /cards/:cardId/likes
-  likeCard(cardId, _isLiked) {
+  updateLike(cardId) {
     return fetch(this.baseUrl + `/cards/${cardId}/likes`, {
-      method: _isLiked ? "DELETE" : "PUT",
+      method: "PUT",
       headers: this.headers,
     }).then(this._checkServerResponse);
   }
 
-  //dislike a card DELETE /cards/:cardId/likes
-  dislikeCard(cardId) {
+  removeLike(cardId) {
     return fetch(this.baseUrl + `/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this.headers,
     }).then(this._checkServerResponse);
   }
+  //like a card PUT /cards/:cardId/likes
+  // likeCard(cardId, _isLiked) {
+  //   return fetch(this.baseUrl + `/cards/${cardId}/likes`, {
+  //     method: _isLiked ? "DELETE" : "PUT",
+  //     headers: this.headers,
+  //   }).then(this._checkServerResponse);
+  // }
+
+  // //dislike a card DELETE /cards/:cardId/likes
+  // dislikeCard(cardId) {
+  //   return fetch(this.baseUrl + `/cards/${cardId}/likes`, {
+  //     method: "DELETE",
+  //     headers: this.headers,
+  //   }).then(this._checkServerResponse);
+  // }
 }
